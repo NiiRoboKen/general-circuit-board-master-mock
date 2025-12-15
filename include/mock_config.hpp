@@ -1,0 +1,43 @@
+#pragma once
+
+// board config
+#define BOARD_ID 0x1
+
+// serial config
+#define SERIAL_BAUDRATE 9600
+
+// CAN config
+#define CAN_BAUDRATE 1000E3
+#define CAN_TX_PIN   4
+#define CAN_RX_PIN   5
+
+// state config
+#include "state.hpp"
+namespace {
+    uint16_t config_commands[1] = {
+        0x0010
+    };
+    uint16_t config_angle_pid_commands[1] = {
+        0x0011
+    };
+    uint16_t config_speed_pid_commands[1] = {
+        0x0012
+    };
+    uint16_t run_angle_pid_commands[2] = {
+        0x0101,
+        0x0111
+    };
+    uint16_t run_speed_pid_commands[2] = {
+        0x0102,
+        0x0112
+    };
+    uint16_t run_duty_commands[1] = {
+        0x0103
+    };
+}
+State configring            = State(config_commands, 1);
+State configring_angle_pid  = State(config_angle_pid_commands, 1);
+State configring_speed_pid  = State(config_speed_pid_commands, 1);
+State running_angle_pid     = State(run_angle_pid_commands, 2);
+State running_speed_pid     = State(run_speed_pid_commands, 2);
+State running_duty          = State(run_duty_commands, 1);
