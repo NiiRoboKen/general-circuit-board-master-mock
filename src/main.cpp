@@ -46,6 +46,14 @@ void can_callback(twai_message_t msg) {
                 esp_restart();
                 break;
             case 0x0002 :
+                PersedExpectedCANID pong;
+                pong.command = 0x0003;
+                pong.senderId = BOARD_ID;
+                pong.receiverId = 0xFFFF;
+
+                uint8_t empty_data[] = {0};
+
+                can.sendExtended(merge_persed_expected_can_id(pong), empty_data, 1);
                 break;
             case 0x0010 :
                 break;
