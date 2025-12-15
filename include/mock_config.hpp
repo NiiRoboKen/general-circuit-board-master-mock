@@ -12,7 +12,7 @@
 #define CAN_RX_PIN   5
 
 // state config
-#include "state.hpp"
+#include "excutable_command_state.hpp"
 namespace {
     uint16_t config_commands[1] = {
         0x0010
@@ -35,9 +35,9 @@ namespace {
         0x0103
     };
 }
-State configring            = State(config_commands, 1);
-State configring_angle_pid  = State(config_angle_pid_commands, 1);
-State configring_speed_pid  = State(config_speed_pid_commands, 1);
-State running_angle_pid     = State(run_angle_pid_commands, 2);
-State running_speed_pid     = State(run_speed_pid_commands, 2);
-State running_duty          = State(run_duty_commands, 1);
+ExcutableCommandState configring            = ExcutableCommandState(config_commands, 1);
+ExcutableCommandState configring_angle_pid  = ExcutableCommandState(config_angle_pid_commands, 1);
+ExcutableCommandState configring_speed_pid  = ExcutableCommandState(config_speed_pid_commands, 1);
+ExcutableCommandState running_angle_pid     = ExcutableCommandState(run_angle_pid_commands, 2);
+ExcutableCommandState running_speed_pid     = ExcutableCommandState(run_speed_pid_commands, 2);
+ExcutableCommandState running_duty          = ExcutableCommandState(run_duty_commands, 1);

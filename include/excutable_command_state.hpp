@@ -2,9 +2,9 @@
 
 #include <Arduino.h>
 
-class State{
+class ExcutableCommandState{
     public:
-    State(uint16_t* command, int commands_sum);
+    ExcutableCommandState(uint16_t* command, int commands_sum);
     
     bool canExcute(uint16_t command);
     
@@ -14,13 +14,13 @@ class State{
     const int       m_excutable_commands_sum;
 };
 
-State::State(uint16_t* commands, int commands_sum) :
+ExcutableCommandState::ExcutableCommandState(uint16_t* commands, int commands_sum) :
     m_excutable_commands(commands),
     m_excutable_commands_sum(commands_sum) {
     commands[commands_sum];
 }
 
-bool State::canExcute(uint16_t command) {
+bool ExcutableCommandState::canExcute(uint16_t command) {
     for(uint16_t core_command : m_core_commands)
         if(command == core_command) return true;
     for(int i = 0; i < m_excutable_commands_sum; i++)

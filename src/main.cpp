@@ -5,6 +5,7 @@
 #include "perse_expected_can_id.hpp"
 
 CanDriver can;
+ExcutableCommandState current_state{configring};
 
 void can_callback(twai_message_t msg);
 
@@ -28,8 +29,43 @@ void can_callback(twai_message_t msg) {
         Serial.println("invaild CAN ID: Standard ID");
         return;
     }
-    if(perse_expected_can_id(msg.identifier).receiverId != BOARD_ID) {
+    PersedExpectedCANID persed_msg_id = perse_expected_can_id(msg.identifier);
+    if(persed_msg_id.receiverId != BOARD_ID) {
         Serial.println("invaild CAN ID: unequal receiver ID");
+        return;
+    }
+    
+    if(current_state.canExcute(persed_msg_id.command)) {
+        switch(persed_msg_id.command) {
+            case 0x0000 :
+                break;
+            case 0x0001 :
+                break;
+            case 0x0002 :
+                break;
+            case 0x0010 :
+                break;
+            case 0x0011 :
+                break;
+            case 0x0012 :
+                break;
+            case 0x0101 :
+                break;
+            case 0x0102 :
+                break;
+            case 0x0103 :
+                break;
+            case 0x0111 :
+                break;
+            case 0x0112 :
+                break;
+
+            default:
+                Serial.print("command not found: ");
+                Serial.println(persed_msg_id.command);
+                break;
+        }
+    } else {
         return;
     }
 }
