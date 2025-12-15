@@ -58,20 +58,28 @@ void can_callback(twai_message_t msg) {
                 Serial.println("PING: return PONG.");
                 break;
             case 0x0010 :
+                Serial.println("SET CONFIG: ");
                 break;
             case 0x0011 :
+                Serial.println("SET PID GAIN (ANGLE): ");
                 break;
             case 0x0012 :
+                Serial.println("SET PID GAIN (RPM): ");
                 break;
             case 0x0101 :
+                Serial.println("SET ANGLE: ");
                 break;
             case 0x0102 :
+                Serial.println("SET RPM: ");
                 break;
             case 0x0103 :
+                Serial.println("SET DUTY: ");
                 break;
             case 0x0111 :
+                Serial.println("REQUEST GET ANGLE: ");
                 break;
             case 0x0112 :
+                Serial.println("REQUEST GET RPM: ");
                 break;
 
             default:
