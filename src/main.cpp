@@ -2,7 +2,7 @@
 #include <esp_can.hpp>
 
 #include "mock_config.hpp"
-#include "perse_expected_can_id.hpp"
+#include "merge_or_perse_expected_can_id.hpp"
 
 CanDriver can;
 ExcutableCommandState current_state{configring};
@@ -38,8 +38,12 @@ void can_callback(twai_message_t msg) {
     if(current_state.canExcute(persed_msg_id.command)) {
         switch(persed_msg_id.command) {
             case 0x0000 :
+                Serial.println("STOP: board stop by reboot.");
+                while(1) delay(100);
                 break;
             case 0x0001 :
+                Serial.println("RESET: board reboot. WARN: esp_restart() reset only CPU without peripherals.");
+                esp_restart();
                 break;
             case 0x0002 :
                 break;
