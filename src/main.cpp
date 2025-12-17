@@ -3,9 +3,10 @@
 
 #include "mock_config.hpp"
 #include "merge_or_perse_expected_can_id.hpp"
+#include "current_state.hpp"
 
 CanDriver can;
-ExcutableCommandState current_state{configring};
+CurrentState current_state = CurrentState(&configring);
 
 void can_callback(twai_message_t msg);
 
@@ -62,9 +63,11 @@ void can_callback(twai_message_t msg) {
                 break;
             case 0x0011 :
                 Serial.println("SET PID GAIN (ANGLE): ");
+                current_state.update(&running_angle_pid);
                 break;
             case 0x0012 :
                 Serial.println("SET PID GAIN (RPM): ");
+                current_state.update(&running_speed_pid);
                 break;
             case 0x0101 :
                 Serial.println("SET ANGLE: ");

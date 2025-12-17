@@ -9,9 +9,9 @@ class ExcutableCommandState{
     bool canExcute(uint16_t command);
     
     private:
-    const uint16_t* m_excutable_commands;
     const uint16_t  m_core_commands[3] = {0x0000, 0x0001, 0x0002};
-    const int       m_excutable_commands_sum;
+    uint16_t*       m_excutable_commands;
+    int             m_excutable_commands_sum;
 };
 
 ExcutableCommandState::ExcutableCommandState(uint16_t* commands, int commands_sum) :
